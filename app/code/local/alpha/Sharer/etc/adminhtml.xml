@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <system>
+            <children>
+                <alpha_sharer translate="title" module="sharer">
+                    <title>Alpha Sharer</title>
+                    <sort_order>10</sort_order>
+                    <action>adminhtml/share</action>
+                </alpha_sharer>
+            </children>
+        </system>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <alpha_sharer>
+                                <title>Alpha Sharer Messages</title>
+                                <sort_order>10</sort_order>
+                            </alpha_sharer>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <sharer translate="title" module="sharer">
+                                        <title>Alpha Sharer Section</title>
+                                    </sharer>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

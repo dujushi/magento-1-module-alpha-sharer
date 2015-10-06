@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <tabs>
+        <alpha translate="label" module="sharer">
+            <label>Alpha</label>
+            <sort_order>200</sort_order>
+        </alpha>
+    </tabs>
+    <sections>
+        <sharer translate="label" module="sharer">
+            <label>Sharer</label>
+            <tab>alpha</tab>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+
+            <groups>
+                <facebook_group translate="label" module="sharer">
+                    <label>Facebook Setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+
+                    <fields>
+                        <id_input translate="label">
+                            <label>App ID: </label>
+                            <comment></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </id_input>
+                        <secret_input translate="label">
+                            <label>App Secret: </label>
+                            <comment></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </secret_input>
+                    </fields>
+                </facebook_group>
+            </groups>
+        </sharer>
+    </sections>
+</config>

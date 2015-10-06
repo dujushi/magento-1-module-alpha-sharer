@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Alpha_Sharer>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Alpha_Sharer>
+    </modules>
+</config>

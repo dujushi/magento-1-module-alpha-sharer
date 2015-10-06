@@ -1,0 +1,92 @@
+<?php $_product = $this->getProduct(); ?>
+
+<div id="dialog-form" title="Share on Facebook" style="display: none;">
+    <form id="facebook-form">
+        <fieldset>
+            <input type="hidden" name="product_id" id="product_id" value="<?=$_product->getId()?>" />
+            <textarea name="message" id="message" placeholder="Add your message" rows="7"></textarea>
+
+            <!-- Allow form submission with keyboard without duplicating the dialog button -->
+            <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+        </fieldset>
+    </form>
+</div>
+
+<a href="#" class="link-facebook" id="share-on-facebook"><?php echo $this->__('Share on Facebook') ?></a>
+
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '1500260493601670',
+            xfbml      : true,
+            version    : 'v2.4'
+        });
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    $j(function() {
+        var dialog, form, access_token, facebook_user_id,
+
+            dialog = $j( "#dialog-form" ).dialog({
+                autoOpen: false,
+                height: 300,
+                width: 350,
+                modal: true,
+                buttons: {
+                    "Share": function() {
+                        var json_data = {"access_token": access_token,
+                            "facebook_user_id": facebook_user_id,
+                            "url": window.location.href,
+                            "product_id": $j("#product_id").val(),
+                            "message": $j("#message").val(),
+                        };
+                        $j.post( "/sharer/share/facebook", json_data)
+                            .done(function( data ) {
+                                dialog.dialog( "close" );
+                            });
+                    },
+                    Cancel: function() {
+                        dialog.dialog( "close" );
+                    }
+                },
+                close: function() {
+                }
+            });
+
+        form = dialog.find( "form" ).on( "submit", function( event ) {
+            event.preventDefault();
+        });
+
+        $j( "#share-on-facebook" ).button().on( "click", function(e) {
+            e.preventDefault();
+
+            FB.getLoginStatus(function(response) {
+                if (response.status === 'connected') {
+                    console.log(response);
+                    access_token = response.authResponse.accessToken;
+                    facebook_user_id = response.authResponse.userID;
+                    dialog.dialog( "open" );
+                }
+                else {
+                    FB.login(function(response) {
+                        console.log(response);
+                        access_token = response.authResponse.accessToken;
+                        facebook_user_id = response.authResponse.userID;
+                        dialog.dialog( "open" );
+                    }, {
+                        scope: 'publish_actions',
+                        return_scopes: true
+                    });
+                }
+            });
+
+        });
+    });
+</script>
