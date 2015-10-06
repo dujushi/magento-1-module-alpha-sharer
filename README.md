@@ -16,6 +16,6 @@ This is a practice project. Don't use it on production :P
  and install it with Magento Connect.
 2. Update catalog.xml layout file. Add the following code to where you want to show the share button.
     ```
-    <action method="append"><block>sharer</block></action>
+    <block type="catalog/product_view" name="sharer" as="sharer" template="sharer/sharer.phtml"/>
     ```
 3. Set up your Facebook App. Add App id and secret to admin configuration page.
